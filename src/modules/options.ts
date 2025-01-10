@@ -284,6 +284,7 @@ async function onSaveClicked(e: any, doc: Document) {
 async function onEnabledClicked(e: any, doc: Document) {
   const checkbox = doc.querySelector("#enabled") as HTMLInputElement;
   checkbox.checked = !checkbox.checked;
+  Zotero.Prefs.set("zodh.enabled", checkbox.checked);
 }
 
 export async function onReady(doc: Document) {

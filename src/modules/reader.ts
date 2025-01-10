@@ -1,5 +1,5 @@
 import { config } from "../../package.json";
-import { optionsLoad } from "../utils/prefs";
+import { getPref, optionsLoad } from "../utils/prefs";
 import { onDomContentLoaded } from "./frame";
 import { Translation } from "./frontend";
 
@@ -10,7 +10,18 @@ export function registerReaderInitializer() {
   Zotero.Reader.registerEventListener(
     "renderTextSelectionPopup",
     (event) => {
+      const enabled = getPref("enabled");
+      if (!enabled) {
+        return;
+      }
+
       const { reader, doc, params, append } = event;
+      const expression = params.annotation.text.trim();
+      const nrofWords = expression.split(" ").length;
+      if (nrofWords > 1) {
+        return;
+      }
+
       const popup = doc.createElement("div");
       popup.id = "odh-popup";
       popup.addEventListener("mousedown", (e: Event) => e.stopPropagation());
@@ -25,14 +36,14 @@ export function registerReaderInitializer() {
       ele.style.maxWidth = "none";
 
       addon
-        .api_getTranslation(params.annotation.text.trim())
+        .api_getTranslation(expression)
         .then((result: any) => {
           const translation = new Translation(optionsLoad());
           translation._document = reader._iframe!.contentDocument;
           // translation._window = reader._iframe;
           addon.data.fg = translation;
           addon.data.fg.notes = result;
-          const expression = params.annotation.text.trim();
+          // const expression = params.annotation.text.trim();
           const notes = addon.data.fg.buildNote(
             reader._iframeWindow![0],
             expression,

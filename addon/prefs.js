@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 pref("__prefsPrefix__.enabled", true);
 pref("__prefsPrefix__.mouseselection", true);
+pref("__prefsPrefix__.singlewordmode", true);
 pref("__prefsPrefix__.hotkey", "16");
 pref("__prefsPrefix__.maxcontext", "1");
 pref("__prefsPrefix__.maxexample", "2");

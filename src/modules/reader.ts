@@ -18,7 +18,7 @@ export function registerReaderInitializer() {
       const { reader, doc, params, append } = event;
       const expression = params.annotation.text.trim();
       const nrofWords = expression.split(" ").length;
-      if (nrofWords > 1) {
+      if (nrofWords > 1 && getPref("singlewordmode")) {
         return;
       }
 

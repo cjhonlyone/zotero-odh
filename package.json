@@ -40,14 +40,13 @@
     "@typescript-eslint/parser": "^8.5.0",
     "chokidar": "^4.0.1",
     "compressing": "^1.10.0",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.24.0",
     "eslint": "^9.10.0",
-    "eslint-config-prettier": "^10.0.1",
+    "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.5",
-    "release-it": "^18.1.2",
     "replace-in-file": "^8.1.0",
     "typescript": "^5.3.3",
-    "zotero-plugin-scaffold": "^0.2.3",
+    "zotero-plugin-scaffold": "^0.1.7",
     "zotero-types": "^3.0.2"
   },
   "eslintConfig": {
@@ -113,24 +112,5 @@
         }
       }
     ]
-  },
-  "release-it": {
-    "git": {
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": false
-    },
-    "github": {
-      "release": false,
-      "assets": [
-        "build/*.xpi"
-      ]
-    },
-    "hooks": {
-      "before:init": "npm run lint",
-      "after:bump": "npm run build",
-      "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
-    }
   }
 }

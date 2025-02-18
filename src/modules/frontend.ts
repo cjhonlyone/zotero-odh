@@ -29,8 +29,13 @@ export class Translation {
     this.services = "none";
   }
 
-  async api_addNote(params: { nindex: any; dindex: any; context: any }) {
-    const { nindex, dindex, context } = params;
+  async api_addNote(params: {
+    nindex: any;
+    dindex: any;
+    context: any;
+    extrainfo: any;
+  }) {
+    const { nindex, dindex, context, extrainfo } = params;
 
     const notedef = Object.assign({}, this.notes[nindex]);
     notedef.definition =
@@ -39,6 +44,7 @@ export class Translation {
       this.notes[nindex].css + this.notes[nindex].definitions.join("<hr/>");
     notedef.sentence = context;
     notedef.url = window.location.href;
+    notedef.extrainfo = extrainfo;
     const response = await addNote(notedef);
 
     if (this._document == null) return;
@@ -124,10 +130,11 @@ export class Translation {
       content += "</div>";
     }
     // content += `<textarea id="odh-context" class="odh-sentence">${this.sentence}</textarea>`;
-    content += '<div id="odh-container" class="odh-sentence"></div>';
+    content += `<div id="odh-container" class="odh-sentence"></div>`;
+    // content += `<div id="odh-container" class="odh-sentence">${this.sentence}</div>`;
     // return this.popupHeader() + content + this.popupFooter();
-    // return `<div class="odh-notes">` + content + this.popupIcons();
-    return `<div class="odh-notes">` + content;
+    return `<div class="odh-notes">` + content + this.popupIcons();
+    // return `<div class="odh-notes">` + content;
   }
   popupIcons() {
     const root = rootURI;
@@ -142,8 +149,8 @@ export class Translation {
       : 0;
 
     return `
-              <div class="icons hidden">
-                  <!-- <div id="context">${this.sentence}</div> -->
+              <div class="icons hidden" style="display: none;">
+                  <div id="context">${this.sentence}</div>
                   <div id="monolingual">${monolingual}</div>
               </div>
             `;

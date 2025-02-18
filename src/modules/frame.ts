@@ -11,8 +11,8 @@ function registerAddNoteLinks(doc: Document) {
       addon.data.fg?.api_addNote({
         nindex: ds.nindex,
         dindex: ds.dindex,
-        // context: doc.querySelector(".spell-content")?.innerHTML,
-        context: null,
+        context: doc.querySelector(".spell-content")?.innerHTML,
+        extrainfo: doc.querySelector(".odh-extra")?.innerHTML,
       });
     });
   }
@@ -98,7 +98,7 @@ export function onDomContentLoaded(doc: Document) {
   registerAudioLinks(doc);
   // registerSoundLinks();
   // registerHiddenClass();
-  // initSpellnTranslation(doc);
+  initSpellnTranslation(doc);
 }
 
 export function api_setActionState(

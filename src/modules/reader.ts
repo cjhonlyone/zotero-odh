@@ -83,13 +83,14 @@ export function registerReaderInitializer() {
           updateStyle(popup, "hr", getHrElementStyle);
           updateStyle(popup, ".hidden", getHiddenClassStyle);
           updateStyle(popup, ".hightlight", getHightlightClassStyle);
+          updateStyle(popup, ".spell", getSpellClassStyle);
+          updateStyle(popup, ".spell-content", getSpellContentClassStyle);
+
           popup.style.visibility = "visible";
           // popup.contentWindow!.scrollTo(0, 0);
           // popup.srcdoc = content;
           // popup.src = "chrome://zodh/content/popup.html";
           onDomContentLoaded(doc);
-          // updateStyle(popup, ".spell", getSpellClassStyle);
-          // updateStyle(popup, ".spell-content", getSpellContentClassStyle);
           // updateStyle(popup, ".spell-bar", getSpellBarClassStyle);
           // updateStyle(popup, ".spell-zone", getSpellZoneClassStyle);
           // updateStyle(popup, ".spell-icon", getSpellIconClassStyle);

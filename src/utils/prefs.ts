@@ -75,7 +75,7 @@ export function optionsLoad(): Option {
     typename: getPref("typename") as string,
     expression: getPref("expression") as string,
     reading: getPref("reading") as string,
-    extrainfo: getPref("extraiofo") as string,
+    extrainfo: getPref("extrainfo") as string,
     definition: getPref("definition") as string,
     definitions: getPref("definitions") as string,
     sentence: getPref("sentence") as string,
@@ -105,7 +105,7 @@ export function optionsSave(options: Option) {
   setPref("typename", options.typename);
   setPref("expression", options.expression);
   setPref("reading", options.reading);
-  setPref("extraiofo", options.extraiofo);
+  setPref("extrainfo", options.extrainfo);
   setPref("definition", options.definition);
   setPref("definitions", options.definitions);
   setPref("sentence", options.sentence);

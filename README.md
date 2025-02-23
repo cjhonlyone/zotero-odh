@@ -2,6 +2,7 @@
 
 [![Using Zotero Plugin Template](https://img.shields.io/badge/Using-Zotero%20Plugin%20Template-blue?style=flat-square&logo=github)](https://github.com/windingwind/zotero-plugin-template)
 ![GitHub License](https://img.shields.io/github/license/1ywan/zotero-odh)
+![](https://img.shields.io/badge/Zotero-7-red)
 
 Basically the same features as ODH for Chrome/Firefox, but for Zotero.
 

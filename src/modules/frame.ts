@@ -8,7 +8,7 @@ function registerAddNoteLinks(doc: Document) {
       const ds = (e.currentTarget as HTMLImageElement).dataset;
       // (e.currentTarget as HTMLImageElement)!.src = getImageSource(doc, "load");
 
-      addon.data.fg?.api_addNote({
+      addon.data.currentTranslation?.api_addNote({
         nindex: ds.nindex,
         dindex: ds.dindex,
         context: doc.querySelector(".spell-content")?.innerHTML,
@@ -25,7 +25,7 @@ function registerAudioLinks(doc: Document) {
       e.preventDefault();
       if (e.currentTarget == null) return;
       const ds = (e.currentTarget as HTMLDivElement).dataset;
-      const fg = addon.data.fg;
+      const fg = addon.data.currentTranslation;
       if (ds.nindex === undefined || ds.dindex === undefined) return;
       const url = fg?.notes[ds.nindex].audios[ds.dindex];
       for (const key in fg?.audios) {

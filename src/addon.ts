@@ -2,7 +2,7 @@ import { ColumnOptions } from "zotero-plugin-toolkit/dist/helpers/virtualizedTab
 import { DialogHelper } from "zotero-plugin-toolkit/dist/helpers/dialog";
 import hooks from "./hooks";
 import { createZToolkit } from "./utils/ztoolkit";
-import { Translation } from "./modules/frontend";
+import { Translation } from "./modules/reader";
 import { Ankiconnect } from "./modules/ankiconnect";
 import { Ankiweb } from "./modules/ankiweb";
 import { optionsLoad } from "./utils/prefs";
@@ -26,7 +26,7 @@ export class Addon {
     dictSelected: any;
     dictNamelist: any;
     audios: { [key: string]: any };
-    fg: Translation | null;
+    currentTranslation: Translation | null;
   };
   public rootURI: string;
   // Lifecycle hooks
@@ -65,7 +65,7 @@ export class Addon {
       dictSelected: null,
       dictNamelist: [],
       audios: [],
-      fg: null,
+      currentTranslation: null,
     };
 
     this.hooks = hooks;
@@ -336,3 +336,8 @@ export class Addon {
 }
 
 export default Addon;
+// window.odhfront = new ODHFront();
+export async function isConnected() {
+  const result = await addon.opt_getVersion();
+  return result;
+}

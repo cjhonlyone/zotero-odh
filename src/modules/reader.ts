@@ -25,8 +25,12 @@ export function registerReaderInitializer() {
 
       const popup = doc.createElement("div");
       popup.id = "odh-popup";
+      popup.className = "label-popup";
       popup.addEventListener("mousedown", (e: Event) => e.stopPropagation());
       popup.addEventListener("scroll", (e: Event) => e.stopPropagation());
+      // popup.addEventListener("keydown", (e: KeyboardEvent) => {
+      //   e.stopPropagation();
+      // });
 
       popup.setAttribute("style", getOdhPopupStyle());
 
@@ -373,28 +377,18 @@ function updateStyle(
 }
 export class Translation {
   options?: Option;
-  point: { x: number; y: number } | null;
   notes: any;
   sentence: null;
-  audio: { [key: string]: any } | null;
-  activateKey: number;
-  exitKey: number;
   maxContext: number;
-  services: string;
   [key: string]: any;
   // _window?: Window;
   _document?: Document;
 
   constructor(options: Option) {
     this.options = options;
-    this.point = null;
     this.notes = null;
     this.sentence = null;
-    this.audio = null;
-    this.activateKey = 16; // shift 16, ctl 17, alt 18
-    this.exitKey = 27; // esc 27
     this.maxContext = 1; //max context sentence #
-    this.services = "none";
   }
 
   async api_addNote(params: {

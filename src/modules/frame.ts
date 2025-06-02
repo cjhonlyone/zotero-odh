@@ -33,7 +33,7 @@ function registerAudioLinks(doc: Document) {
       }
 
       try {
-        const audio = addon.data.audios[url] || doc.createElement("audio");
+        const audio = addon.data.audios[url] || document.createElement("audio");
         audio.src = url;
         audio.currentTime = 0;
         audio.play();

@@ -390,6 +390,52 @@
   <groupbox>
     <label>
       <html:h2>
+        <span data-l10n-id="grpCardMoving" style="display: inline-block"
+          >Card Moving Settings</span
+        >
+        <span class="option-helps">
+          <html:a
+            href="https://github.com/1ywan/zotero-odh#moving-cards-between-decks"
+            target="_blank"
+            >?</html:a
+          >
+        </span>
+      </html:h2>
+    </label>
+    <hbox class="crosspanel">
+      <label data-l10n-id="lblSourceDeck" class="label">Source Deck</label>
+      <html:input
+        type="text"
+        id="sourceDeck"
+        placeholder="COCA20000::lowfrequency"
+        class="col-3x input"
+        preference="__prefsPrefix__.sourceDeck"
+      />
+    </hbox>
+    <hbox class="crosspanel">
+      <label data-l10n-id="lblTargetDeck" class="label">Target Deck</label>
+      <html:input
+        type="text"
+        id="targetDeck"
+        placeholder="COCA20000::plan"
+        class="col-3x input"
+        preference="__prefsPrefix__.targetDeck"
+      />
+    </hbox>
+    <hbox class="crosspanel">
+      <label data-l10n-id="lblWordField" class="label">Word Field</label>
+      <html:input
+        type="text"
+        id="wordField"
+        placeholder="Front"
+        class="col-3x input"
+        preference="__prefsPrefix__.wordField"
+      />
+    </hbox>
+  </groupbox>
+  <groupbox>
+    <label>
+      <html:h2>
         <span data-l10n-id="grpUdfScripts" style="display: inline-block"
           >User-Defined Script</span
         >

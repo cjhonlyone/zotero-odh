@@ -27,6 +27,9 @@ export type Option = {
   sysscripts: string;
   udfscripts: string;
   dictSelected: string;
+  sourceDeck: string;
+  targetDeck: string;
+  wordField: string;
 };
 
 /**
@@ -84,6 +87,9 @@ export function optionsLoad(): Option {
     sysscripts: getPref("sysscripts") as string,
     udfscripts: getPref("udfscripts") as string,
     dictSelected: getPref("dictSelected") as string,
+    sourceDeck: getPref("sourceDeck") as string,
+    targetDeck: getPref("targetDeck") as string,
+    wordField: getPref("wordField") as string,
     // dictNameList: getPref("dictNameList") as string[],
   };
 }

@@ -7,7 +7,6 @@ export class Ankiconnect {
   async ankiInvoke(action: string, params = {}, timeout = 3000) {
     const version = this.version;
     const request = { action, version, params };
-    ztoolkit.log(`[AnkiConnect] Invoking action: ${action}, params: ${JSON.stringify(params)}`);
     try {
       const raw_response = await Zotero.HTTP.request(
         "POST",
@@ -21,7 +20,6 @@ export class Ankiconnect {
         },
       );
       const response = raw_response.response;
-      ztoolkit.log(`[AnkiConnect] Response: ${JSON.stringify(response)}`);
       // return response?.response;
       return new Promise((resolve, reject) => {
         try {
@@ -35,12 +33,10 @@ export class Ankiconnect {
             throw "response is missing required result field";
           }
           if (response.error) {
-            ztoolkit.log(`[AnkiConnect] Error from Anki: ${response.error}`);
             throw response.error;
           }
           resolve(response.result);
         } catch (e) {
-          ztoolkit.log(`[AnkiConnect] Exception: ${e}`);
           reject(e);
         }
       });

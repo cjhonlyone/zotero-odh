@@ -75,12 +75,21 @@ export class Ankiconnect {
     return await this.ankiInvoke("findNotes", { query });
   }
 
+  async findCards(query: string) {
+    return await this.ankiInvoke("findCards", { query });
+  }
+
   async notesInfo(notes: number[]) {
     return await this.ankiInvoke("notesInfo", { notes });
   }
 
   async cardsOfNote(noteId: number) {
-    return await this.ankiInvoke("cardsOfNote", { note: noteId });
+    // Use notesInfo to get card IDs from a note
+    const notesInfo = await this.ankiInvoke("notesInfo", { notes: [noteId] });
+    if (notesInfo && notesInfo.length > 0 && notesInfo[0].cards) {
+      return notesInfo[0].cards;
+    }
+    return [];
   }
 
   async changeDeck(cards: number[], deck: string) {

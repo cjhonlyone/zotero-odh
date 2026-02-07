@@ -205,21 +205,21 @@ export class Addon {
 
     if (!this.target) return null;
 
-    // Search for notes in the source deck with the exact word
+    // Search for cards in the source deck with the exact word
     const query = `"deck:${sourceDeck}" "${wordField}:${word}"`;
-    const noteIds = await this.target.findNotes(query);
+    const cardIds = await this.target.findCards(query);
 
-    if (!noteIds || noteIds.length === 0) return null;
+    if (!cardIds || cardIds.length === 0) return null;
 
-    // Return the first matching note ID
-    return noteIds[0];
+    // Return all matching card IDs
+    return cardIds;
   }
 
-  async api_moveCard(noteId: number) {
+  async api_moveCard(cardIds: number[]) {
     const options = optionsLoad();
     const targetDeck = options.targetDeck || "COCA20000::plan";
 
-    ztoolkit.log(`[MoveCard] Starting card move for noteId: ${noteId}, targetDeck: ${targetDeck}`);
+    ztoolkit.log(`[MoveCard] Starting card move for cardIds: ${JSON.stringify(cardIds)}, targetDeck: ${targetDeck}`);
 
     if (!this.target) {
       ztoolkit.log(`[MoveCard] Error: No Anki connection`);
@@ -227,16 +227,6 @@ export class Addon {
     }
 
     try {
-      // Get all cards for this note
-      ztoolkit.log(`[MoveCard] Getting cards for note: ${noteId}`);
-      const cardIds = await this.target.cardsOfNote(noteId);
-      ztoolkit.log(`[MoveCard] Found cards: ${JSON.stringify(cardIds)}`);
-
-      if (!cardIds || cardIds.length === 0) {
-        ztoolkit.log(`[MoveCard] Error: No cards found`);
-        return { success: false, error: "No cards found for note" };
-      }
-
       // Move all cards to the target deck
       ztoolkit.log(`[MoveCard] Moving cards ${JSON.stringify(cardIds)} to deck: ${targetDeck}`);
       const result = await this.target.changeDeck(cardIds, targetDeck);

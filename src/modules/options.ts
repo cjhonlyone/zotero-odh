@@ -356,6 +356,13 @@ export async function onReady(doc: Document) {
   (doc.querySelector("#duplicate") as HTMLSelectElement).value =
     Zotero.Prefs.get("zodh.duplicate") as string;
 
+  (doc.querySelector("#sourceDeck") as HTMLInputElement).value =
+    Zotero.Prefs.get("zodh.sourceDeck") as string;
+  (doc.querySelector("#targetDeck") as HTMLInputElement).value =
+    Zotero.Prefs.get("zodh.targetDeck") as string;
+  (doc.querySelector("#wordField") as HTMLInputElement).value =
+    Zotero.Prefs.get("zodh.wordField") as string;
+
   const fields = [
     "deckname",
     "typename",

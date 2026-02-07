@@ -60,6 +60,11 @@ lblAudio = Audio
 lblUdfScripts = Script Name
 lblSysScripts = Script Name
 
+grpCardMoving = Card Moving Settings
+lblSourceDeck = Source Deck
+lblTargetDeck = Target Deck
+lblWordField = Word Field
+
 lstOnoff = Onoff
 lstCloud = Cloud
 lstName = Name

@@ -60,6 +60,11 @@ lblAudio= 音频文件
 lblUdfScripts= 自选脚本名称
 lblSysScripts= 系统脚本名称
 
+grpCardMoving= 卡片移动设置
+lblSourceDeck= 源牌组
+lblTargetDeck= 目标牌组
+lblWordField= 单词字段
+
 lstOnoff= 激活
 lstCloud= 云端
 lstName= 脚本名称

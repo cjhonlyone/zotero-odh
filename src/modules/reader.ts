@@ -484,8 +484,8 @@ export class Translation {
 
       // Add move button inline only for the first note if card exists
       const inlineMoveButton = (nindex === 0 && existingCardIds) ? `<button class="odh-movecard" data-cardids="${existingCardIds.join(',')}"
-                             style="padding: 0px 0px; background-color: #4CAF50; color: white;
-                                    border: none; border-radius: 3px; cursor: pointer; font-size: 0.9em; margin-left: 0px; vertical-align: middle;">
+                             style="padding: 0px 3px; background-color: #4CAF50; color: white;
+                                    border-radius: 3px; font-size: 0.8em; margin: 0 3px; display: inline-block;">
                        Move
                      </button>` : '';
 

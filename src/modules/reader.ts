@@ -481,11 +481,20 @@ export class Translation {
             audiosegment += `<div class="odh-playaudio" data-nindex="${nindex}" data-dindex="${dindex}"></div>`;
         }
       }
+
+      // Add move button inline only for the first note if card exists
+      const inlineMoveButton = (nindex === 0 && existingCardIds) ? `<button class="odh-movecard" data-cardids="${existingCardIds.join(',')}"
+                             style="padding: 0px 0px; background-color: #4CAF50; color: white;
+                                    border: none; border-radius: 3px; cursor: pointer; font-size: 0.9em; margin-left: 0px; vertical-align: middle;">
+                       Move
+                     </button>` : '';
+
       content += `
                   <div class="odh-headsection">
                       <span class="odh-audios">${audiosegment}</span>
                       <span class="odh-expression">${note.expression}</span>
                       <span class="odh-reading">${note.reading}</span>
+                      ${inlineMoveButton}
                       <span class="odh-extra">${note.extrainfo}</span>
                   </div>`;
       for (const [dindex, definition] of note.definitions.entries()) {
@@ -503,17 +512,8 @@ export class Translation {
     // content += `<div id="odh-container" class="odh-sentence">${this.sentence}</div>`;
     // return this.popupHeader() + content + this.popupFooter();
     const icons = this.popupIcons();
-    
-    // Add move button at the top if card exists
-    const moveButton = existingCardIds ? `<div style="margin: 10px; text-align: center;">
-                    <button class="odh-movecard" data-cardids="${existingCardIds.join(',')}"
-                            style="padding: 8px 16px; background-color: #4CAF50; color: white;
-                                   border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
-                      Move to Plan Deck
-                    </button>
-                  </div>` : '';
-    
-    return `<div class="odh-notes">` + moveButton + content + icons;
+
+    return `<div class="odh-notes">` + content + icons;
     // return `<div class="odh-notes">` + content;
   }
   popupIcons() {

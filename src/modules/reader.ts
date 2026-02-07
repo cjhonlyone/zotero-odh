@@ -463,10 +463,10 @@ export class Translation {
     }
 
     // Check if card exists in source deck
-    let existingNoteId = null;
+    let existingCardIds = null;
     if (notes.length > 0 && services == "ankiconnect") {
       const word = notes[0].expression;
-      existingNoteId = await addon.api_findExistingCard(word);
+      existingCardIds = await addon.api_findExistingCard(word);
     }
 
     for (const [nindex, note] of notes.entries()) {
@@ -504,16 +504,16 @@ export class Translation {
     // return this.popupHeader() + content + this.popupFooter();
     const icons = this.popupIcons();
     
-    // Add move button at the bottom if card exists
-    const moveButton = existingNoteId ? `<div style="margin: 10px; text-align: center;">
-                    <button class="odh-movecard" data-noteid="${existingNoteId}"
+    // Add move button at the top if card exists
+    const moveButton = existingCardIds ? `<div style="margin: 10px; text-align: center;">
+                    <button class="odh-movecard" data-cardids="${existingCardIds.join(',')}"
                             style="padding: 8px 16px; background-color: #4CAF50; color: white;
                                    border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
                       Move to Plan Deck
                     </button>
                   </div>` : '';
     
-    return `<div class="odh-notes">` + content + icons + moveButton;
+    return `<div class="odh-notes">` + moveButton + content + icons;
     // return `<div class="odh-notes">` + content;
   }
   popupIcons() {

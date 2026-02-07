@@ -24,9 +24,12 @@ function registerMoveCardLinks(doc: Document) {
       e.stopPropagation();
       e.preventDefault();
       const btn = e.currentTarget as HTMLButtonElement;
-      const noteId = parseInt(btn.dataset.noteid || "0");
+      const cardIdsStr = btn.dataset.cardids || "";
 
-      if (!noteId) return;
+      if (!cardIdsStr) return;
+
+      const cardIds = cardIdsStr.split(',').map(id => parseInt(id)).filter(id => !isNaN(id));
+      if (cardIds.length === 0) return;
 
       // Disable button and show loading state
       btn.disabled = true;
@@ -34,7 +37,7 @@ function registerMoveCardLinks(doc: Document) {
       btn.style.backgroundColor = "#999";
 
       // Move the card
-      const result = await addon.api_moveCard(noteId);
+      const result = await addon.api_moveCard(cardIds);
 
       if (result.success) {
         btn.textContent = "✓ Moved!";

@@ -432,6 +432,24 @@
         preference="__prefsPrefix__.wordField"
       />
     </hbox>
+    <hbox class="crosspanel">
+      <checkbox
+        id="useAnkiContent"
+        data-l10n-id="lblUseAnkiContent"
+        label="Use Anki card content (skip online dictionary)"
+        preference="__prefsPrefix__.useAnkiContent"
+      />
+    </hbox>
+    <hbox class="crosspanel">
+      <label data-l10n-id="lblDisplayFields" class="label">Display Fields</label>
+      <html:input
+        type="text"
+        id="displayFields"
+        placeholder="sentence,glossary"
+        class="col-3x input"
+        preference="__prefsPrefix__.displayFields"
+      />
+    </hbox>
   </groupbox>
   <groupbox>
     <label>

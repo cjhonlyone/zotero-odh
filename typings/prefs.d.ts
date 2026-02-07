@@ -37,6 +37,8 @@ declare namespace _ZoteroTypes {
       "sourceDeck": string;
       "targetDeck": string;
       "wordField": string;
+      "useAnkiContent": boolean;
+      "displayFields": string;
     };
   }
 }

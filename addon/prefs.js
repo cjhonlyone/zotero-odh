@@ -33,3 +33,5 @@ pref("__prefsPrefix__.dictNameList", "");
 pref("__prefsPrefix__.sourceDeck", "COCA20000::lowfrequency");
 pref("__prefsPrefix__.targetDeck", "COCA20000::plan");
 pref("__prefsPrefix__.wordField", "Front");
+pref("__prefsPrefix__.useAnkiContent", false);
+pref("__prefsPrefix__.displayFields", "sentence,glossary");

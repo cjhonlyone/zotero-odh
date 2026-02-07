@@ -43,15 +43,15 @@ function registerMoveCardLinks(doc: Document) {
         btn.textContent = "✓ Moved!";
         btn.style.backgroundColor = "#4CAF50";
         setTimeout(() => {
-          btn.textContent = "Card Moved";
+          btn.textContent = "Move";
           btn.disabled = true;
         }, 1500);
       } else {
-        btn.textContent = "✗ Failed: " + (result.error || "Error");
+        btn.textContent = "✗ Failed";
         btn.style.backgroundColor = "#f44336";
         btn.disabled = false;
         setTimeout(() => {
-          btn.textContent = "Move to Plan Deck";
+          btn.textContent = "Move";
           btn.style.backgroundColor = "#4CAF50";
         }, 3000);
       }

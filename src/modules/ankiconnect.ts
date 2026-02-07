@@ -66,4 +66,20 @@ export class Ankiconnect {
     const version = await this.ankiInvoke("version", {}, 100);
     return version ? "ver:" + version : null;
   }
+
+  async findNotes(query: string) {
+    return await this.ankiInvoke("findNotes", { query });
+  }
+
+  async notesInfo(notes: number[]) {
+    return await this.ankiInvoke("notesInfo", { notes });
+  }
+
+  async cardsOfNote(noteId: number) {
+    return await this.ankiInvoke("cardsOfNote", { note: noteId });
+  }
+
+  async changeDeck(cards: number[], deck: string) {
+    return await this.ankiInvoke("changeDeck", { cards, deck });
+  }
 }

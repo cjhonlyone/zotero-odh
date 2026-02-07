@@ -30,3 +30,6 @@ pref(
 pref("__prefsPrefix__.udfscripts", "");
 pref("__prefsPrefix__.dictSelected", "");
 pref("__prefsPrefix__.dictNameList", "");
+pref("__prefsPrefix__.sourceDeck", "COCA20000::lowfrequency");
+pref("__prefsPrefix__.targetDeck", "COCA20000::plan");
+pref("__prefsPrefix__.wordField", "Front");

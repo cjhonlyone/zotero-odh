@@ -198,6 +198,46 @@ export class Addon {
     return result;
   }
 
+  async api_findExistingCard(word: string) {
+    const options = optionsLoad();
+    const sourceDeck = options.sourceDeck || "COCA20000::lowfrequency";
+    const wordField = options.wordField || "Front";
+
+    if (!this.target) return null;
+
+    // Search for notes in the source deck with the exact word
+    const query = `"deck:${sourceDeck}" "${wordField}:${word}"`;
+    const noteIds = await this.target.findNotes(query);
+
+    if (!noteIds || noteIds.length === 0) return null;
+
+    // Return the first matching note ID
+    return noteIds[0];
+  }
+
+  async api_moveCard(noteId: number) {
+    const options = optionsLoad();
+    const targetDeck = options.targetDeck || "COCA20000::plan";
+
+    if (!this.target) return { success: false, error: "No Anki connection" };
+
+    try {
+      // Get all cards for this note
+      const cardIds = await this.target.cardsOfNote(noteId);
+
+      if (!cardIds || cardIds.length === 0) {
+        return { success: false, error: "No cards found for note" };
+      }
+
+      // Move all cards to the target deck
+      await this.target.changeDeck(cardIds, targetDeck);
+
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: String(error) };
+    }
+  }
+
   formatNote(notedef: any) {
     const options = optionsLoad();
 

@@ -1,6 +1,6 @@
 {
   "name": "zotero-odh",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "a odh wrapper for Zotero",
   "config": {
     "addonName": "Zotero ODH",
@@ -8,8 +8,8 @@
     "addonRef": "zodh",
     "addonInstance": "ZODH",
     "prefsPrefix": "extensions.zotero.zodh",
-    "releasePage": "https://github.com/1ywan/zotero-odh/releases",
-    "updateJSON": "https://raw.githubusercontent.com/1ywan/zotero-odh/main/update.json"
+    "releasePage": "https://github.com/cjhonlyone/zotero-odh/releases",
+    "updateJSON": "https://raw.githubusercontent.com/cjhonlyone/zotero-odh/main/update.json"
   },
   "main": "src/index.ts",
   "scripts": {
@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/1ywan/zotero-odh.git"
+    "url": "git+https://github.com/cjhonlyone/zotero-odh.git"
   },
-  "author": "1ywan",
+  "author": "Claude/CJH",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/1ywan/zotero-odh/issues"
+    "url": "https://github.com/cjhonlyone/zotero-odh/issues"
   },
-  "homepage": "https://github.com/1ywan/zotero-odh#readme",
+  "homepage": "https://github.com/cjhonlyone/zotero-odh#readme",
   "dependencies": {
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",

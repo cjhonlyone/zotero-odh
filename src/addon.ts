@@ -194,6 +194,20 @@ export class Addon {
       expression = expression.slice(0, -1);
     }
 
+    const options = optionsLoad();
+    
+    // If useAnkiContent is enabled, try to get content from Anki first
+    if (options.useAnkiContent && options.services === "ankiconnect") {
+      const cardIds = await this.api_findExistingCard(expression);
+      if (cardIds && cardIds.length > 0) {
+        const ankiContent = await this.api_getAnkiCardContent(cardIds);
+        if (ankiContent) {
+          return [ankiContent];
+        }
+      }
+    }
+
+    // Fall back to online dictionary
     const result = await this.findTerm(expression);
     return result;
   }
@@ -213,6 +227,49 @@ export class Addon {
 
     // Return all matching card IDs
     return cardIds;
+  }
+
+  async api_getAnkiCardContent(cardIds: number[]) {
+    if (!this.target || !cardIds || cardIds.length === 0) return null;
+
+    try {
+      const options = optionsLoad();
+      const cardsInfo = await this.target.cardsInfo(cardIds);
+      if (!cardsInfo || cardsInfo.length === 0) return null;
+
+      // Take the first card and format it as a note
+      const card = cardsInfo[0];
+      const fields = card.fields || {};
+      
+      // Get display fields from config (default: sentence, glossary)
+      const displayFieldsStr = options.displayFields || "sentence,glossary";
+      const displayFields = displayFieldsStr.split(',').map(f => f.trim()).filter(f => f);
+      
+      // Get field values as definitions in the order specified by displayFields
+      const definitions = [];
+      for (const fieldName of displayFields) {
+        if (fields[fieldName]) {
+          const fieldData = fields[fieldName];
+          if (fieldData && typeof fieldData === 'object' && 'value' in fieldData) {
+            const value = (fieldData as any).value;
+            if (value && value.trim()) {
+              definitions.push(`<b>${fieldName}:</b> ${value}`);
+            }
+          }
+        }
+      }
+
+      return {
+        expression: card.fields[Object.keys(card.fields)[0]]?.value || "",
+        reading: "",
+        extrainfo: `Deck: ${card.deckName}`,
+        definitions: definitions.length > 0 ? definitions : ["No content available"],
+        audios: [],
+      };
+    } catch (error) {
+      ztoolkit.log(`Error getting Anki card content: ${error}`);
+      return null;
+    }
   }
 
   async api_moveCard(cardIds: number[]) {

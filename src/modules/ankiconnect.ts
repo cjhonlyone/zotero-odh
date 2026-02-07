@@ -91,4 +91,8 @@ export class Ankiconnect {
   async changeDeck(cards: number[], deck: string) {
     return await this.ankiInvoke("changeDeck", { cards, deck });
   }
+
+  async cardsInfo(cards: number[]) {
+    return await this.ankiInvoke("cardsInfo", { cards });
+  }
 }

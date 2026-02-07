@@ -30,6 +30,8 @@ export type Option = {
   sourceDeck: string;
   targetDeck: string;
   wordField: string;
+  useAnkiContent: boolean;
+  displayFields: string;
 };
 
 /**
@@ -90,6 +92,8 @@ export function optionsLoad(): Option {
     sourceDeck: getPref("sourceDeck") as string,
     targetDeck: getPref("targetDeck") as string,
     wordField: getPref("wordField") as string,
+    useAnkiContent: getPref("useAnkiContent") as boolean,
+    displayFields: getPref("displayFields") as string,
     // dictNameList: getPref("dictNameList") as string[],
   };
 }

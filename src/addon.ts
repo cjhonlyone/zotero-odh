@@ -219,22 +219,16 @@ export class Addon {
     const options = optionsLoad();
     const targetDeck = options.targetDeck || "COCA20000::plan";
 
-    ztoolkit.log(`[MoveCard] Starting card move for cardIds: ${JSON.stringify(cardIds)}, targetDeck: ${targetDeck}`);
-
     if (!this.target) {
-      ztoolkit.log(`[MoveCard] Error: No Anki connection`);
       return { success: false, error: "No Anki connection" };
     }
 
     try {
       // Move all cards to the target deck
-      ztoolkit.log(`[MoveCard] Moving cards ${JSON.stringify(cardIds)} to deck: ${targetDeck}`);
       const result = await this.target.changeDeck(cardIds, targetDeck);
-      ztoolkit.log(`[MoveCard] Move result: ${JSON.stringify(result)}`);
 
       return { success: true };
     } catch (error) {
-      ztoolkit.log(`[MoveCard] Error: ${error}`);
       return { success: false, error: String(error) };
     }
   }

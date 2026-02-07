@@ -462,6 +462,13 @@ export class Translation {
         : 'class="odh-addnote-disabled odh-addnote-plus"';
     }
 
+    // Check if card exists in source deck
+    let existingNoteId = null;
+    if (notes.length > 0 && services == "ankiconnect") {
+      const word = notes[0].expression;
+      existingNoteId = await addon.api_findExistingCard(word);
+    }
+
     for (const [nindex, note] of notes.entries()) {
       content += note.css + '<div class="odh-note">';
       let audiosegment = "";
@@ -492,6 +499,18 @@ export class Translation {
     }
     // content += `<textarea id="odh-context" class="odh-sentence">${this.sentence}</textarea>`;
     content += `<div id="odh-container" class="odh-sentence"></div>`;
+
+    // Add move button if card exists
+    if (existingNoteId) {
+      content += `<div style="margin: 10px; text-align: center;">
+                    <button class="odh-movecard" data-noteid="${existingNoteId}"
+                            style="padding: 8px 16px; background-color: #4CAF50; color: white;
+                                   border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                      Move to Plan Deck
+                    </button>
+                  </div>`;
+    }
+
     // content += `<div id="odh-container" class="odh-sentence">${this.sentence}</div>`;
     // return this.popupHeader() + content + this.popupFooter();
     return `<div class="odh-notes">` + content + this.popupIcons();

@@ -18,6 +18,51 @@ function registerAddNoteLinks(doc: Document) {
   }
 }
 
+function registerMoveCardLinks(doc: Document) {
+  for (const button of doc.getElementsByClassName("odh-movecard")) {
+    button.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const btn = e.currentTarget as HTMLButtonElement;
+      const noteId = parseInt(btn.dataset.noteid || "0");
+
+      if (!noteId) return;
+
+      // Confirm with user
+      const confirmed = confirm(
+        "Move this card from COCA20000::lowfrequency to COCA20000::plan?"
+      );
+      if (!confirmed) return;
+
+      // Disable button and show loading state
+      btn.disabled = true;
+      btn.textContent = "Moving...";
+      btn.style.backgroundColor = "#999";
+
+      // Move the card
+      const result = await addon.api_moveCard(noteId);
+
+      if (result.success) {
+        btn.textContent = "✓ Moved!";
+        btn.style.backgroundColor = "#4CAF50";
+        setTimeout(() => {
+          btn.textContent = "Card Moved";
+          btn.disabled = true;
+        }, 1500);
+      } else {
+        btn.textContent = "✗ Failed";
+        btn.style.backgroundColor = "#f44336";
+        btn.disabled = false;
+        setTimeout(() => {
+          btn.textContent = "Move to Plan Deck";
+          btn.style.backgroundColor = "#4CAF50";
+        }, 2000);
+        alert("Failed to move card: " + (result.error || "Unknown error"));
+      }
+    });
+  }
+}
+
 function registerAudioLinks(doc: Document) {
   for (const link of doc.getElementsByClassName("odh-playaudio")) {
     link.addEventListener("click", (e) => {
@@ -95,6 +140,7 @@ function hideTranslation() {
 
 export function onDomContentLoaded(doc: Document) {
   registerAddNoteLinks(doc);
+  registerMoveCardLinks(doc);
   registerAudioLinks(doc);
   // registerSoundLinks();
   // registerHiddenClass();

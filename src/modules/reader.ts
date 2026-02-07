@@ -500,20 +500,20 @@ export class Translation {
     // content += `<textarea id="odh-context" class="odh-sentence">${this.sentence}</textarea>`;
     content += `<div id="odh-container" class="odh-sentence"></div>`;
 
-    // Add move button if card exists
-    if (existingNoteId) {
-      content += `<div style="margin: 10px; text-align: center;">
+    // content += `<div id="odh-container" class="odh-sentence">${this.sentence}</div>`;
+    // return this.popupHeader() + content + this.popupFooter();
+    const icons = this.popupIcons();
+    
+    // Add move button at the bottom if card exists
+    const moveButton = existingNoteId ? `<div style="margin: 10px; text-align: center;">
                     <button class="odh-movecard" data-noteid="${existingNoteId}"
                             style="padding: 8px 16px; background-color: #4CAF50; color: white;
                                    border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
                       Move to Plan Deck
                     </button>
-                  </div>`;
-    }
-
-    // content += `<div id="odh-container" class="odh-sentence">${this.sentence}</div>`;
-    // return this.popupHeader() + content + this.popupFooter();
-    return `<div class="odh-notes">` + content + this.popupIcons();
+                  </div>` : '';
+    
+    return `<div class="odh-notes">` + content + icons + moveButton;
     // return `<div class="odh-notes">` + content;
   }
   popupIcons() {

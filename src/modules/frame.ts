@@ -28,12 +28,6 @@ function registerMoveCardLinks(doc: Document) {
 
       if (!noteId) return;
 
-      // Confirm with user
-      const confirmed = confirm(
-        "Move this card from COCA20000::lowfrequency to COCA20000::plan?"
-      );
-      if (!confirmed) return;
-
       // Disable button and show loading state
       btn.disabled = true;
       btn.textContent = "Moving...";

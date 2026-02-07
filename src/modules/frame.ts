@@ -44,14 +44,13 @@ function registerMoveCardLinks(doc: Document) {
           btn.disabled = true;
         }, 1500);
       } else {
-        btn.textContent = "✗ Failed";
+        btn.textContent = "✗ Failed: " + (result.error || "Error");
         btn.style.backgroundColor = "#f44336";
         btn.disabled = false;
         setTimeout(() => {
           btn.textContent = "Move to Plan Deck";
           btn.style.backgroundColor = "#4CAF50";
-        }, 2000);
-        alert("Failed to move card: " + (result.error || "Unknown error"));
+        }, 3000);
       }
     });
   }
@@ -106,10 +105,13 @@ function registerAudioLinks(doc: Document) {
 
 function initSpellnTranslation(doc: Document) {
   doc.querySelector("#odh-container")?.appendChild(spell(doc));
-  doc.querySelector(".spell-content")!.innerHTML =
-    doc.querySelector("#context")!.innerHTML;
+  const spellContent = doc.querySelector(".spell-content");
+  const context = doc.querySelector("#context");
+  if (spellContent && context) {
+    spellContent.innerHTML = context.innerHTML;
+  }
   if (
-    (doc.querySelector("#monolingual") as HTMLSelectElement)!.innerText == "1"
+    (doc.querySelector("#monolingual") as HTMLSelectElement)?.innerText == "1"
   )
     hideTranslation();
 }
